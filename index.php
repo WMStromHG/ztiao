@@ -31,22 +31,27 @@
 
 <body>
 <div id="_unable"></div>
+<div id="_reset">
+    <div class="score">13</div>
+    <img class="again" src="img/game/again.png" alt=""/>
+    <div class="top">历史最高分：65</div>
+</div>
 
 <div id="app">
 
-    <section class="cc " id="Loader">
+    <section class="cc" id="Loader">
         <div class="main">
-            <div class="word"></div>
             <div class="line">
                 <div class="lineX"></div>
             </div>
-            <img src="img/loader.png" alt="">
+            <img src="img/loader.gif" alt="">
+            <div class="word"></div>
         </div>
     </section>
 
     <section class="cc " id="Index">
         <div class="main">
-
+            <img src="img/home.jpg" alt=""/>
         </div>
     </section>
 
@@ -57,7 +62,6 @@
             <div id="_btn"></div>
         </div>
     </section>
-
 
 </div>
 

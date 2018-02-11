@@ -1,4 +1,8 @@
 ﻿@charset "utf-8";
+@font-face{
+    font-family: number;
+    src: url('../../font/number.TTF');
+}
 *{  margin:0;padding:0; font-family:"Microsoft YaHei", "微软雅黑", "宋体", "Arial";
     outline: none; -moz-user-select: none;
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
@@ -19,8 +23,28 @@ html,body{width: 700px; height: 100%; overflow: hidden; background-color: #000;}
 #_unable{
     position: absolute; top: 0; left: 0;
     width: 100%; height: 100%;
-    z-index: 99999;
-    display: none;
+    z-index: 99999; display: none;
+    opacity: 0; background-color: #000;
+}
+#_reset{
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 99999; display: none;
+    background-color: rgba(0,0,0,0.77);
+    text-align: center;
+}
+#_reset .score{
+    position: absolute; top: 160px; left: 73px;
+    font-family: number !important; line-height: 560px;
+    color: #0060a6; font-size: 140px;
+    width: 550px; height: 583px; background: url("../../img/game/score.png") no-repeat;
+}
+#_reset .again{
+    position: absolute; bottom: 150px; left: 150px;
+}
+#_reset .top{
+    position: absolute; bottom: 30px; left: 0;
+    width: 100%; font-size: 24px; color: #fff;
 }
 video::-webkit-media-controls-enclosure {
     display: none !important;
@@ -45,12 +69,6 @@ iframe{display: none; opacity: 0}
 #Loader{ display: block; background-color: #000}
 #Loader .loadImg{
     position: absolute; left: 565px; top: 221px;
-}
-#Loader .w{
-    position: absolute; left: 0px; top: 45%;
-    height: 50px; width: 100%;
-    color: #333; font-size: 30px; text-align: center;
-    display: none;
 }
 
 /*#_resize, #_resize_x{display: none;}*/

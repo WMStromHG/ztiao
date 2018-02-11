@@ -5,7 +5,6 @@ var rez = {
     ww : $(window).width(),
     wh : $(window).height(),
     url : "http://localhost:813/"
-    //url : "http://demo.maitianer.com/h5/ak/"
 };
 var Server = "http://localhost:813/";
 

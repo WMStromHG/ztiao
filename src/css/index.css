@@ -2,39 +2,15 @@
 
 /*Loader*/
 #Loader{
-    background-color: #000000;
+    background-color: #fff;
 }
 #Loader img{
     position: absolute;
     top: 232px;
-    left: 307px;
-    width: 85px;
-    height: 659px;
+    width: 100%;
 }
 #Loader .word{
-    position: absolute;
-    top: 590px;
-    left: 323px;
-    width: 55px;
-    height: 29px;
-    line-height: 29px;
-    text-align: center;
-    color: #fff;
-    font-size: 20px;
-}
-#Loader .line{
-    position: absolute;
-    top: 388px;
-    left: 343px;
-    width: 15px;
-    height: 155px;
-    overflow: hidden;
-}
-#Loader .lineX{
-    position: absolute;
-    top: 155px;
-    left: 0px;
-    width: 15px;
-    height: 155px;
-    background-color: #fff;
+    position: absolute; opacity: 0.5;
+    top: 600px; font-size: 50px;
+    width: 100%; text-align: center;
 }
