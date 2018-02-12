@@ -12,22 +12,36 @@ git.pw = 300;
 git.ph = 600;
 
 var boxReg = {};
-boxReg.box1 = [224, 125, 1, 40,22, "box1_word", 140,-140]; //中心x,中心y,分数,跳过去偏移x,y,浮出图片, 高度微调参数
-boxReg.box2 = [229, 90, 1, 0,0, "box2_word",  170,-170];
-boxReg.box3 = [233, 116, 1, 0,0, "box3_word",  170,-150];
-boxReg.box4 = [227, 87, 1, 0,0, "box4_word",  170,-170];
-boxReg.box5 = [220, 85, 1, 0,0, "box5_word",  170,-170];
-boxReg.box6 = [227, 90, 1, 0,0, "box6_word",  170,-170];
-boxReg.box7 = [224, 122, 1, 0,0, "box7_word",  170,-170];
-boxReg.box8 = [222, 88, 1, 0,0, "box8_word",  130,-170];
-boxReg.box9 = [228, 103, 1, 0,0, "box9_word",  170,-170];
-boxReg.box10 = [223, 123, 1, 0,0, "box10_word",  130,-140];
-boxReg.box11 = [223, 171, 1, 0,0, "box11_word",  170,-170];
-boxReg.box12 = [218, 81, 1, 0,0, "box12_word",  170,-170];
-boxReg.box13 = [231, 162, 1, 0,0, "", 0,0];
-boxReg.box14 = [226, 90, 1, 0,0, "box_word",  190,-140];
-boxReg.box15 = [228, 84, 1, 0,0, "box_word",  190,-140];
-boxReg.box16 = [203, 78, 1, 0,0, "box_word",  190,-140];
+boxReg.box1 = [224, 155, 15, 0,0, "box1_word", 140,-140]; //中心x,中心y,分数,跳过去偏移x,y,浮出图片, 高度微调参数
+boxReg.box2 = [240, 110, 3, 0,0, "box2_word",  170,-170];
+boxReg.box3 = [265, 150, 5, 0,0, "box3_word",  170,-150];
+boxReg.box4 = [227, 117, 3, 0,0, "box4_word",  170,-170];
+boxReg.box5 = [230, 125, 3, 0,0, "box5_word",  170,-170];
+boxReg.box6 = [245, 120, 3, 0,0, "box6_word",  170,-170];
+boxReg.box7 = [250, 182, 3, 0,0, "box7_word",  170,-170];
+boxReg.box8 = [222, 118, 3, 0,0, "box8_word",  130,-170];
+boxReg.box9 = [265, 180, 10, 0,0, "box9_word",  170,-170];
+boxReg.box10 = [250, 153, 3, 0,0, "box10_word",  130,-140];
+boxReg.box11 = [250, 210, 3, 0,0, "box11_word",  170,-170];
+boxReg.box12 = [218, 111, 20, 0,0, "box12_word",  170,-170];
+boxReg.box13 = [231, 190, 0, 0,0, "", 0,0];
+boxReg.box14 = [220, 120, 1, 0,0, "box_word",  190,-140];
+boxReg.box15 = [228, 114, 1, 0,0, "box_word",  190,-140];
+boxReg.box16 = [203, 108, 0, 0,0, "box_word",  190,-140];
+boxReg.box17 = [230, 125, 1, 0,0, "box_word",  190,-140];
+boxReg.box18 = [235, 170, 1, 0,0, "box_word",  190,-140];
+boxReg.box19 = [203, 180, 1, 0,0, "box_word",  190,-140];
+boxReg.box20 = [226, 120, 1, 0,0, "box_word",  190,-140];
+boxReg.box21 = [228, 114, 1, 0,0, "box_word",  190,-140];
+boxReg.box22 = [210, 115, 1, 0,0, "box_word",  190,-140];
+boxReg.box23 = [185, 85, 0, 0,0, "", 0,0];
+boxReg.box24 = [220, 120, 0, 0,0, "", 0,0];
+boxReg.box25 = [240, 100, 0, 0,0, "", 0,0];
+boxReg.box26 = [220, 115, 0, 0,0, "", 0,0];
+boxReg.box27 = [230, 115, 0, 0,0, "", 0,0];
+boxReg.box28 = [230, 115, 0, 0,0, "", 0,0];
+boxReg.box29 = [230, 115, 0, 0,0, "", 0,0];
+boxReg.box30 = [230, 115, 0, 0,0, "", 0,0];
 
 function GameLoad_cav(){
     cav_game = new CanvasCreate($("#cav_game"));
@@ -36,11 +50,18 @@ function GameLoad_cav(){
     cav_game.framerate = 10;
 
     cav_game.drawSprite("jump","",{
-        framerate:70,
+        framerate:35,
         mov: {
-            ini: [0],
-            run: [0,30,"ini"],
-            back: { frames: cv.back(30), next:"ini"}
+            ini2: [0],
+            ini: [18],
+            back: [0,17,"ini2"],
+            run: [18,35,"ini"],
+
+            back_to: [0,17,"to_ini"],
+            run_to: [18,35,"to_ini2"],
+
+            to_ini : [36,41,"ini"],
+            to_ini2: { frames: [41,40,39,38,37,36], next:"ini2"}
         }
     });
     Dom.p = cav_game.sprite["jump"];
@@ -52,7 +73,7 @@ function GameLoad_cav(){
             run: [0,13,"ini"]
         },
         conf:{
-            x:-818, y:-160
+            x:-814, y:-160
         }
     });
     Dom.good = cav_game.sprite["good"];
@@ -64,7 +85,7 @@ function GameLoad_cav(){
             run: [0,24]
         },
         conf:{
-            x:-818, y:-175
+            x:-818, y:-165
         }
     });
     Dom.press = cav_game.sprite["press"];
@@ -76,13 +97,10 @@ function GameLoad_cav(){
 
     cav_game.draw("person", drawArr);
 
-
-
     GameReSet();
     GamePersonSet(1);
 
     cav_game.show("game");
-
 
 }
 
@@ -97,13 +115,11 @@ function GameReSet(){
 
     SceneMov = [];
 
-    var ArrList=[1,2,3,4,5,6,7,8,9,10,11,12,14,14,14,14,14,14,14,14,14,14,15,15,15,15,15,16,16,16,16];
+    var ArrList=[1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
 
     var Arrlist_box = getArrayItems(ArrList,19);
 
-    console.log(Arrlist_box);
-
-    GameBoxSet(1, "b1","box15", 0, 0);
+    GameBoxSet(1, "b1","box16", 0, 0);
     GameBoxSet(2, "b2","box"+Arrlist_box[1], 1,  "d");
     GameBoxSet(3, "b3","box"+Arrlist_box[2], -1, "r");
     GameBoxSet(4, "b4","box"+Arrlist_box[3], -1, "d");
@@ -131,7 +147,7 @@ function GamePersonGet(id){
     var reg = boxReg["box"+id];
     // Dom.p.x = box.x - git.pw/2 - reg[0]/2;
     // Dom.p.y = box.y - git.ph/2 - reg[1]/2;
-    return {x:(box.x - git.pw/2), y:(box.y - git.ph/2 - 80)};
+    return {x:(box.x - git.pw/2), y:(box.y - git.ph/2 - 115)};
 }
 
 function GamePersonSet(id){
@@ -143,7 +159,7 @@ function GamePersonSet(id){
     // Dom.p.x = box.x - git.pw/2 - reg[0]/2;
     // Dom.p.y = box.y - git.ph/2 - reg[1]/2;
     cav_game.cc["person"].x = box.x - git.pw/2;
-    cav_game.cc["person"].y = box.y - git.ph/2 - 80;
+    cav_game.cc["person"].y = box.y - git.ph/2 - 115;
 
 }
 
@@ -181,7 +197,7 @@ function GameBoxSet(id, nm, img, b, s){
     GameBoxs[id].num = boxReg[img][2];
     GameBoxs[id].create = b;
     GameBoxs[id].x = bx;
-    GameBoxs[id].y= by;
+    GameBoxs[id].y = by;
     GameBoxs[id].img = img;
     GameBoxs[id].word = cav_game.img[nm+"_word"];
     GameBoxs[id].reg = {x:boxReg[img][3], y:boxReg[img][4]};
@@ -216,4 +232,84 @@ function getArrayItems(arr, num) {
         }
     }
     return return_array;
+}
+
+
+function GetRequest() {
+    var url = location.search; //获取url中含"?"符后的字串
+    var theRequest = new Object();
+    if (url.indexOf("?") != -1) {
+        var str = url.substr(1);
+        var strs = str.split("&");
+        for(var i = 0; i < strs.length; i ++) {
+            theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+        }
+    }
+
+    Dom.openid = theRequest['openid'];
+    Dom.nickname = theRequest['nickname'];
+    Dom.sex = theRequest['sex'];
+    Dom.language = theRequest['language'];
+    Dom.city = theRequest['city'];
+    Dom.province = theRequest['province'];
+    Dom.country = theRequest['country'];
+    Dom.headimgurl = theRequest['headimgurl'];
+    Dom.unionid = theRequest['unionid'];
+
+    $("#_unable").html('<input id="openid" name="openid" value="'+Dom.openid+'" type="hidden"/>');
+
+    //生成玩家信息
+    $.ajax({
+        type: "POST",
+        url: "people.php",
+        data: "openid="+Dom.openid+
+            "&nickname="+Dom.nickname+
+            "&sex="+Dom.sex+
+            "&language="+Dom.language+
+            "&city="+Dom.city+
+            "&province="+Dom.province+
+            "&country="+Dom.country+
+            "&headimgurl="+Dom.headimgurl+
+            "&unionid="+Dom.unionid,
+        success: function(msg){
+//            alert( msg );
+        }
+    });
+
+
+    //向数据库调取所有玩家顺序
+   $.ajax({
+       type: "POST",
+       data: "openid="+Dom.openid,
+       url: "getlist.php",
+       success: function(msg){
+           if(msg=="err") {
+               alert("openid不正确");
+               return;
+           }
+           var json = eval('(' + msg + ')');
+
+           var list = json.list;
+           var html = "";
+           for(var i in list){
+               html+= '<div class="li">\n' +
+                   '                <div class="i">'+(parseInt(i)+1)+'</div>\n' +
+                   '                <div class="headimg"><img src="'+list[i].headimgurl+'" alt=""/></div>\n' +
+                   '                <div class="nm">'+list[i].nickname+'</div>\n' +
+                   '                <div class="score">'+list[i].score+'</div>\n' +
+                   '            </div>';
+           }
+           $("#index_list .list_box").html(html);
+
+           var my = json.my;
+           var my_html = '<div class="i">'+my.num+'</div>\n' +
+               '            <div class="headimg"><img src="'+my.headimgurl+'" alt=""/></div>\n' +
+               '            <div class="nm">'+my.nickname+'</div>\n' +
+               '            <div class="score">'+my.score+'</div>';
+           $("#index_list .my").html(my_html);
+
+       }
+   });
+
+    return theRequest;
 }

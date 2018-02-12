@@ -34,17 +34,26 @@ html,body{width: 700px; height: 100%; overflow: hidden; background-color: #000;}
     text-align: center;
 }
 #_reset .score{
-    position: absolute; top: 160px; left: 73px;
-    font-family: number !important; line-height: 560px;
-    color: #0060a6; font-size: 140px;
-    width: 550px; height: 583px; background: url("../../img/game/score.png") no-repeat;
+    position: absolute; top: 218px; left: 27px;
+    color: #ffd88b; font-size: 150px; line-height: 600px;
+    width: 655px; height: 523px; background: url("../../img/game/score.png") no-repeat;
+}
+#_reset .share{
+    position: absolute; top: 630px; left: 300px;
+    width: 110px; height: 80px;
 }
 #_reset .again{
-    position: absolute; bottom: 150px; left: 150px;
+    position: absolute; top: 838px; left: 118px;
 }
-#_reset .top{
-    position: absolute; bottom: 30px; left: 0;
-    width: 100%; font-size: 24px; color: #fff;
+#_reset .list_btn{
+    position: absolute; top: 1023px; left: 205px;
+    width: 283px; height: 83px; background: url("../../img/game/list.png") no-repeat;
+}
+#_share{
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 99999; display: none;
+    background: url("../../img/game/share.png") no-repeat right top rgba(0,0,0,0.7);
 }
 video::-webkit-media-controls-enclosure {
     display: none !important;
@@ -86,4 +95,5 @@ iframe{display: none; opacity: 0}
 #app{overflow: hidden}
 .cc{background-color: #000}
 .cc .bg.p{ background-size:cover;}
+
 

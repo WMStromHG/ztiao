@@ -4,11 +4,16 @@ Room.Game.dom = function(){
     Dom.score = 0;
     Dom.Hand = "";
     Dom.HTime = 0;
-    Dom.Time1 = 3;
-    Dom.Time2 = 10;
+    Dom.Time1 = 6;
+    Dom.Time2 = 8;
+    Dom.video = $("#MP4");
+    Dom.Video = document.getElementById("MP4");
 
     $("#_btn").on('touchstart',function(e){
-        console.log("1 "+Dom.HTime);
+        mp3_play("scale_intro");
+        setTimeout(mp3_play("scale_loop",1),2000);
+
+
         cc.tap(e);
         if(Dom.HTime) return;
         Room.Game.hold();
@@ -22,9 +27,12 @@ Room.Game.dom = function(){
     });
 
     $("#_btn").on('touchend',function(e){
+        mp3_stop("scale_intro");
+        mp3_stop("scale_loop");
+
         //遮罩出现
         Dom._unable.show();
-        console.log("2 "+Dom.HTime);
+
         cc.tap(e);
         Dom.lv++;
 
@@ -42,8 +50,6 @@ Room.Game.dom = function(){
             Room.Game.jump3();
         }
         Dom.HTime = 0;
-
-
     });
 };
 
@@ -57,7 +63,7 @@ Room.Game.hold = function(){
     Dom.py = cav_game.cc["person"].y;
     cav_game.cc["game_b"+id].addChild(cav_game.cc["person"]);
     cav_game.cc["person"].x = -150+GameBoxs[id].reg.x;
-    cav_game.cc["person"].y = -380+GameBoxs[id].reg.y;
+    cav_game.cc["person"].y = -415+GameBoxs[id].reg.y;
 
     Dom.press.gotoAndPlay("run");
     cvtw.get(GameBoxs[id].div).to({scaleY:sy, y:GameBoxs[id].y+25 }, 700);
@@ -70,12 +76,20 @@ Room.Game.press = function(){
 
     Room.Game.box_re();
 
-    Dom.score++;
+    setTimeout(function(){
+        mp3_play("combo");
+    },400);
+
 
     if(Dom.lv == 19){
         Room.Game.jump1(function(){
             Room.Game.box_re();
-            Room.Game.gameover();
+
+            Dom.video.show();
+            Dom.Video.play(0);
+            Dom.Video.addEventListener("ended",function(){
+                Room.Game.gameover();
+            });
         });
     }else{
         //箱子落下
@@ -90,8 +104,19 @@ Room.Game.press = function(){
 Room.Game.jump1 = function(fn){
     var id = Dom.lv+1;
 
-    if(GameBoxs[id].create == 1) Dom.p.gotoAndPlay("run");
-    if(GameBoxs[id].create == -1) Dom.p.gotoAndPlay("back");
+    if(id==20) {
+        Dom.p.gotoAndPlay("run");
+    }else{
+        if(GameBoxs[id].create == 1) {
+            if(GameBoxs[id+1].create == 1) Dom.p.gotoAndPlay("run");
+            if(GameBoxs[id+1].create == -1) Dom.p.gotoAndPlay("run_to");
+        }
+        if(GameBoxs[id].create == -1) {
+            if(GameBoxs[id+1].create == -1) Dom.p.gotoAndPlay("back");
+            if(GameBoxs[id+1].create == 1) Dom.p.gotoAndPlay("back_to");
+        }
+    }
+
     var go = GamePersonGet(id);
     cvtw.get(cav_game.cc["person"]).to({x:go.x+GameBoxs[id].reg.x, y:go.y+GameBoxs[id].reg.y }, 400).call(function(){
         Dom.good.gotoAndPlay("run");
@@ -100,7 +125,7 @@ Room.Game.jump1 = function(fn){
         word.x = x;
         var y = word.y+GameBoxs[id].word_xy.y;
         word.y = y+50;
-        cvtw.get(word).to({y:y, alpha:1 }, 400).wait(500).to({y:y-30, alpha:0 }, 300)
+        cvtw.get(word).to({y:y, alpha:1 }, 400).wait(500).to({y:y-30, alpha:0 }, 2000)
 
     });
 
@@ -152,6 +177,10 @@ Room.Game.scene_mov = function(){
 
 //箱子落下
 Room.Game.box_create = function(){
+
+    Dom.score += GameBoxs[Dom.lv+1].num;
+    $("#score").html(Dom.score);
+
     var id = Dom.lv+2;
     var my = GameBoxs[id].y;
     GameBoxs[id].div.y =  my-150;
@@ -176,6 +205,18 @@ Room.Game.gameover = function(){
         Dom._unable.hide();
         Dom._reset.show();
 
+        var openid = $("#openid").val();
+
+        $.ajax({
+            type: "POST",
+            url: "score.php",
+            data: "openid="+openid+
+                "&score="+Dom.score,
+            success: function(msg){
+//            alert( "Data Saved: " + msg );
+            }
+        });
+
         $("#_reset .score").html(Dom.score);
     },700);
 };
@@ -183,8 +224,10 @@ Room.Game.gameover = function(){
 //game reset
 $("#_reset .again").click(function(){
     Dom._reset.hide();
+    Dom.video.hide();
 
     Dom.score = 0;
+    $("#score").html("0");
 
     cav_game.cc["game"].y = 0;
     cav_game.cc["game"].x = 0;

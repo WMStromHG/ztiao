@@ -85,7 +85,7 @@ class JSSDK {
     return $access_token;
   }
 
-  private function httpGet($url) {
+/*   private function httpGet($url) {
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_TIMEOUT, 500);
@@ -99,7 +99,19 @@ class JSSDK {
     curl_close($curl);
 
     return $res;
-  }
+  } */
+  
+  //Edit by Root.Qi @20180210
+      private function httpGet($url) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $output = curl_exec($ch);
+        curl_close($ch);
+        return $output;
+	  }
 
   private function get_php_file($filename) {
     return trim(substr(file_get_contents($filename), 15));

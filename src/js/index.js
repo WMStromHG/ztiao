@@ -1,6 +1,6 @@
 Room.Loader = {};
 Room.Loader.ppt = function(){
-    var Start = "Game";
+    var Start = "Index";
     cc.ppt(["Loader", Start] , function(after , callback){
         cc.m["Loader"].velocity({ opacity: 0}, { duration: 1000, display: "none" });
         cc.m[Start].css({"opacity": 0}).show().velocity({ opacity: 1}, { duration: 1000});
@@ -11,8 +11,21 @@ Room.Loader.ppt = function(){
 Room.Index = {};
 Room.Index.dom = function(){
     Dom.game = {};
-    $("#Index").tap(function(e){
+    $("#Index .start").tap(function(e){
         Room.Index.ppt();
+    });
+    $(".list_btn").click(function(e){
+        $("#index_list").fadeIn(500);
+    });
+    $("#index_list .exit").click(function(e){
+        $("#index_list").fadeOut(500);
+    });
+
+    $("#_reset .share").click(function(e){
+        $("#_share").fadeIn(500);
+    });
+    $("#_share").click(function(e){
+        $("#_share").fadeOut(500);
     });
 
 };
